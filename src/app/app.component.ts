@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { User } from './models';
 import { AccountService } from './services';
-
+import { Account } from './models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  user: User;
+  account: Account;
 
   constructor(private accountService: AccountService) {
-    this.accountService.user.subscribe((user) => (this.user = user));
+    this.accountService.account.subscribe(
+      (account) => (this.account = account)
+    );
   }
 
   get isLogged() {

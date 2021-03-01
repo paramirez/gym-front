@@ -5,35 +5,35 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.model';
+import { Account } from '../models';
 
 export const localStorageUserKeys = {
-  user: 'prubauser',
-  userexp: 'prubauser_exp',
+  account: 'prubaaccount',
+  accountexp: 'prubaaccount_exp',
 };
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
+  private accountSubject: BehaviorSubject<Account>;
+  public account: Observable<Account>;
 
   constructor(private router: Router, private http: HttpClient) {
-    const token = localStorage.getItem(localStorageUserKeys.user);
+    const token = localStorage.getItem(localStorageUserKeys.account);
     const udecode = this.decodeToken(token);
-    this.userSubject = new BehaviorSubject<User>(
-      new User({ ...udecode, token })
+    this.accountSubject = new BehaviorSubject<Account>(
+      new Account({ ...udecode, token })
     );
-    this.user = this.userSubject.asObservable();
+    this.account = this.accountSubject.asObservable();
   }
 
-  public get userValue(): User {
-    return this.userSubject.value;
+  public get accountValue(): Account {
+    return this.accountSubject.value;
   }
 
   logout() {
-    localStorage.removeItem(localStorageUserKeys.user);
-    localStorage.removeItem(localStorageUserKeys.userexp);
-    this.userSubject.next(null);
+    localStorage.removeItem(localStorageUserKeys.account);
+    localStorage.removeItem(localStorageUserKeys.accountexp);
+    this.accountSubject.next(null);
     this.router.navigate(['/account/login']);
   }
 
@@ -47,11 +47,13 @@ export class AccountService {
         map((res) => {
           if (!res.access_token) return false;
           const { access_token } = res;
-          const udecode = this.decodeToken(access_token);
-
-          localStorage.setItem(localStorageUserKeys.user, btoa(access_token));
+          const udecode = this.decodeToken(btoa(access_token));
           localStorage.setItem(
-            localStorageUserKeys.userexp,
+            localStorageUserKeys.account,
+            btoa(access_token)
+          );
+          localStorage.setItem(
+            localStorageUserKeys.accountexp,
             JSON.stringify(moment().add(udecode.exp, 'second').valueOf())
           );
           this.setSession(udecode, access_token);
@@ -60,16 +62,20 @@ export class AccountService {
       );
   }
 
-  private decodeToken(token) {
-    return token ? JSON.parse(atob(atob(token).split('.')[1])) : {};
+  /**
+   * @param token base64 token
+   */
+  private decodeToken(token: string) {
+    const ctoken = token ? (token.includes('.') ? token : atob(token)) : '';
+    return ctoken ? JSON.parse(atob(ctoken.split('.')[1])) : {};
   }
 
-  private setSession(udecode: Partial<User>, token: string) {
-    this.userSubject.next(new User({ ...udecode, token }));
+  private setSession(udecode: Partial<Account>, token: string) {
+    this.accountSubject.next(new Account({ ...udecode, token }));
   }
 
   getExpiration() {
-    const expiration = localStorage.getItem(localStorageUserKeys.userexp);
+    const expiration = localStorage.getItem(localStorageUserKeys.accountexp);
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
@@ -79,7 +85,7 @@ export class AccountService {
   }
 
   public get isLogged() {
-    return this.isLoggedIn && this.userValue.sub;
+    return this.isLoggedIn && this.accountValue.sub;
   }
 
   public get isLoggedOut() {

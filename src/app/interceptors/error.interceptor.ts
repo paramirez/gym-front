@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err) => {
-        if ([401, 403].includes(err.status) && this.accountService.userValue)
+        if ([401, 403].includes(err.status) && this.accountService.accountValue)
           this.accountService.logout();
 
         const error = err.error?.message || err.statusText;

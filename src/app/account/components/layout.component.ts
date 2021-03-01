@@ -7,6 +7,6 @@ import { AccountService } from 'src/app/services';
 })
 export class LayoutComponent {
   constructor(private router: Router, private accountService: AccountService) {
-    if (this.accountService.userValue) this.router.navigate(['/']);
+    if (this.accountService.accountValue) this.router.navigate(['/']);
   }
 }

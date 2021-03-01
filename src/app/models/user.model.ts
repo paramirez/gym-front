@@ -1,13 +1,20 @@
 export class User {
-  token: string;
-  email: string;
-  exp: number;
-  iat: number;
+  id: number;
   name: string;
-  roles: string[];
-  sub: number;
+  email: string;
+  role: string[] = ['NORMAL'];
+  status: boolean;
+  createdAt: string;
 
-  constructor(user?: Partial<User>) {
-    Object.assign(this, user);
+  constructor(initial?: Partial<User>) {
+    Object.assign(this, initial);
+  }
+}
+
+export class CreateUser extends User {
+  password: string;
+  constructor(initial?: Partial<CreateUser>) {
+    super(initial);
+    Object.assign(this, initial);
   }
 }

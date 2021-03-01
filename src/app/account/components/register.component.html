@@ -1,1 +1,44 @@
-<div>register component</div>
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="sede">Sede</label>
+      <select formControlName="sede">
+        <option [value]="sede.id" *ngFor="let sede of sedes">
+          {{ sede.name }}
+        </option>
+      </select>
+      <div *ngIf="submitted && f.sede.errors">
+        <div *ngIf="submitted && f.sede.errors.required">Sede is required</div>
+      </div>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="submitted && f.email.errors">
+        <div *ngIf="submitted && f.email.errors.required">
+          Email is required
+        </div>
+        <div *ngIf="submitted && f.email.errors.email">Email is invalid</div>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" />
+      <div *ngIf="submitted && f.password.errors">
+        <div *ngIf="submitted && f.password.errors.required">
+          Password is required
+        </div>
+        <div *ngIf="submitted && f.password.errors.minlength">
+          Password min length {{ f.password.errors.minlength.requiredLength }}
+        </div>
+        <div *ngIf="submitted && f.password.errors.withSpaces">
+          Password cannot contain spaces
+        </div>
+      </div>
+    </div>
+    <div>
+      <button [disabled]="loading">Register</button>
+    </div>
+    <a routerLink="../login">Login</a>
+  </form>
+</div>

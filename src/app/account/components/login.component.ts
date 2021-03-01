@@ -47,15 +47,12 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (access) => {
           this.loading = false;
-          if (!access)
-            return this.alertService.error(
-              'No es posible acceder en el momento'
-            );
+          if (!access) return this.alertService.error('Unable to access');
           this.redirect();
         },
         error: (err) => {
           if (err.status === 400 && err.error && err.error.error)
-            this.alertService.error(err.error.error);
+            this.alertService.error(err.error.error, { autoClose: false });
           this.loading = false;
         },
       });
