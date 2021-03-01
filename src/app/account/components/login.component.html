@@ -1,0 +1,27 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" />
+      <div *ngIf="submitted && f.email.errors">
+        <span *ngIf="submitted && f.email.errors.required"
+          >Email is required</span
+        >
+        <span *ngIf="submitted && f.email.errors.email">Email is invalid</span>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" />
+      <div *ngIf="submitted && f.password.errors">
+        <span *ngIf="submitted && f.password.errors.required"
+          >Password is required</span
+        >
+      </div>
+    </div>
+    <div>
+      <button [disabled]="loading">Login</button>
+    </div>
+    <a routerLink="../register">Register</a>
+  </form>
+</div>
