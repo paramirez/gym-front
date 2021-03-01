@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.app {
+}
+.center-form {
+  min-height: 600px;
+}
+
+.footer {
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  background-color: #9b4dca;
+}
+
+.app-container {
+  margin: 0 auto;
+  /* max-width: 112.0rem; */
+  padding: 0 2rem;
+  position: relative;
+  width: 100%;
+}

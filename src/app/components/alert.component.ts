@@ -7,6 +7,7 @@ import { AlertService } from '../services';
 @Component({
   selector: 'alert',
   templateUrl: 'alert.component.html',
+  styleUrls: ['alert.component.css'],
 })
 export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default-alert';
@@ -57,13 +58,13 @@ export class AlertComponent implements OnInit, OnDestroy {
   cssClass(alert: Alert) {
     if (!alert) return;
 
-    const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
+    const classes = [];
 
     const alertTypeClass = {
-      [AlertType.SUCCESS]: 'alert alert-success',
-      [AlertType.ERROR]: 'alert alert-danger',
-      [AlertType.INFO]: 'alert alert-info',
-      [AlertType.WARNING]: 'alert alert-warning',
+      [AlertType.SUCCESS]: 'success',
+      [AlertType.ERROR]: 'error',
+      [AlertType.INFO]: 'info',
+      [AlertType.WARNING]: 'warning',
     };
 
     classes.push(alertTypeClass[alert.type]);

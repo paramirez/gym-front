@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
         },
         error: (err) => {
           if (err.status === 400 && err.error && err.error.error)
-            this.alertService.error(err.error.error, { autoClose: false });
+            this.alertService.warning(err.error.error, { autoClose: false });
           this.loading = false;
         },
       });

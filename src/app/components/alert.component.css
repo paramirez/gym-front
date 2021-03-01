@@ -1,0 +1,30 @@
+.alert {
+  position: fixed;
+  color: gray;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+}
+.content {
+  position: relative;
+  background-color: #95a5a6;
+  margin-top: 5px;
+  color: white;
+}
+.close {
+  cursor: pointer;
+  color: white;
+  font-size: 1.2em;
+}
+.error.content {
+  background-color: #e74c3c;
+}
+.success.content {
+  background-color: #2ecc71;
+}
+.info.content {
+  background-color: #3498db;
+}
+.warning.content {
+  background-color: #f1c40f;
+}

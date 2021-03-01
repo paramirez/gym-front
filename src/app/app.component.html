@@ -1,6 +1,10 @@
-<div>
-  <alert></alert>
-  <button (click)="logout()" *ngIf="isLogged">logout</button>
-  <router-outlet></router-outlet>
-  <div class="color-bg-canvas mb-2">.color-bg-canvas</div>
+<div class="app-container">
+  <div class="row">
+    <div class="column">
+      <button (click)="logout()" *ngIf="isLogged">logout</button>
+      <alert></alert>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
+<div class="footer"></div>
