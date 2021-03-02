@@ -19,7 +19,7 @@ export class AppComponent {
     return this.accountService.isLogged;
   }
 
-  logout() {
-    this.accountService.logout();
+  get cssClass() {
+    return this.isLogged ? '' : 'no-logged';
   }
 }

@@ -1,5 +1,38 @@
 <div class="container">
   <div class="row">
-    <div class="column">Cities</div>
+    <div class="column column-40">
+      <h4>New city</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Sede name</label>
+          <input type="text" formControlName="name" />
+          <div *ngIf="submitted && f.name.errors">
+            <div *ngIf="f.name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div>
+          <button>Create</button>
+        </div>
+      </form>
+    </div>
+    <div class="column">
+      <h4>Cities</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>City name</th>
+            <th>Number of sedes</th>
+            <th>Registered users</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let city of cities">
+            <td>{{ city.name }}</td>
+            <td>{{ city.sedesCounter }}</td>
+            <td>{{ city.userCounter }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

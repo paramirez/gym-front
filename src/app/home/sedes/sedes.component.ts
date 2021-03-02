@@ -46,6 +46,10 @@ export class SedesComponent implements OnInit {
       .subscribe({
         next: (result) => {
           this.loading = false;
+          this.submitted = false;
+          this.form.controls.city.reset('');
+          this.form.controls.name.reset('');
+          this.alertService.success('Sede Created!');
           this.sedes = this.sedes.concat(result);
         },
         error: (err) => {

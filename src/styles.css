@@ -9,7 +9,9 @@ body {
 .center-form {
   min-height: 600px;
 }
-
+.flex {
+  display: flex !important;
+}
 .footer {
   height: 10px;
   bottom: 0;
@@ -30,7 +32,9 @@ body {
   width: 100%;
   min-height: calc(100vh - 60px);
 }
-
+.app-container.no-logged {
+  min-height: calc(100vh - 10px);
+}
 a {
   cursor: pointer;
   user-select: none;

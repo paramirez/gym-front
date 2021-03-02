@@ -79,7 +79,6 @@ export class HomeComponent implements OnInit {
       .updateUser(this.account.sub, { [field]: this.f[field].value })
       .subscribe({
         next: (updated) => {
-          console.log(updated);
           this.loading = false;
           this.cancel();
           return this.alertService.success(

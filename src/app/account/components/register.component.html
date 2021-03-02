@@ -2,6 +2,19 @@
   <div class="row">
     <form class="column" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div>
+        <label for="city">City</label>
+        <select formControlName="city" (change)="cityChange()">
+          <option [value]="city.id" *ngFor="let city of cities">
+            {{ city.name }}
+          </option>
+        </select>
+        <div *ngIf="submitted && f.city.errors">
+          <div *ngIf="submitted && f.city.errors.required">
+            City is required
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sedes && sedes.length">
         <label for="sede">Sede</label>
         <select formControlName="sede">
           <option [value]="sede.id" *ngFor="let sede of sedes">
@@ -14,6 +27,7 @@
           </div>
         </div>
       </div>
+      <div *ngIf="!(sedes && sedes.length)"><h5>Select a city</h5></div>
       <div>
         <label for="email">Email</label>
         <input type="email" formControlName="email" />

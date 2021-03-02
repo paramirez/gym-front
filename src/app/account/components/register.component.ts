@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { City } from 'src/app/models/city.model';
 import { Sede } from 'src/app/models/sede.model';
@@ -22,7 +22,7 @@ import { RegisterValidator } from './register.validators';
   templateUrl: 'register.component.html',
 })
 export class RegisterComponent implements OnInit {
-  private cities: City[];
+  cities: City[];
   sedes: Sede[];
   form: FormGroup;
   loading = false;
@@ -34,19 +34,15 @@ export class RegisterComponent implements OnInit {
     private accountService: AccountService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
     if (this.accountService.isLogged) return this.redirect();
-    this.cityService.getCities().subscribe((x) => (this.cities = x));
-    this.sedeService.getSedes().subscribe((x) => {
-      this.sedes = x;
-      console.log(this.sedes);
-    });
+    this.cityService.getCitiesWithSedes().subscribe((x) => (this.cities = x));
     this.form = this.formBuilder.group({
+      city: ['', Validators.required],
       sede: ['', Validators.required],
       email: ['', [Validators.email, Validators.required]],
       password: [
@@ -58,6 +54,14 @@ export class RegisterComponent implements OnInit {
         ],
       ],
     });
+  }
+
+  cityChange() {
+    if (this.f.city.value) {
+      this.sedeService
+        .getSedeByCityId(this.f.city.value)
+        .subscribe((x) => (this.sedes = x));
+    }
   }
 
   get f() {
@@ -78,7 +82,6 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     this.alertService.clear();
 
-    console.log(this.form);
     if (this.form.invalid) return;
 
     this.loading = true;

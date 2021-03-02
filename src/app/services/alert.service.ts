@@ -24,7 +24,6 @@ export class AlertService {
   }
 
   error(message: string, options?: AlertPartial) {
-    console.log(message);
     this.alert(new Alert({ ...options, type: AlertType.ERROR, message }));
   }
 

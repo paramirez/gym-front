@@ -22,7 +22,11 @@ export class SedeService {
   }
 
   getSedeByName(name: string) {}
-  getSedeBySedeId(id: number) {}
+  getSedeByCityId(id: number) {
+    return this.http
+      .get<Sede[]>(`${environment.apiUrl}/sedes/city/${id}`)
+      .pipe();
+  }
 
   create(sede: Sede) {
     return this.http.post<Sede>(`${environment.apiUrl}/sedes`, sede).pipe();
