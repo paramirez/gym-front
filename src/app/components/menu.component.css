@@ -2,7 +2,8 @@
   border-bottom: 1px solid lightgray;
   padding-bottom: 10px;
   padding-top: 10px;
-  margin-bottom: 30px;
+  min-height: 50px;
+  max-height: 50px;
 }
 
 .line {

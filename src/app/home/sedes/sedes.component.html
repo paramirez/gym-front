@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="column column-40">
+      <h4>New sede</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="city">City</label>
+          <select name="city" formControlName="city">
+            <option [value]="city.id" *ngFor="let city of cities">
+              {{ city.name }}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.city.errors">
+            <div *ngIf="f.city.errors.required">Select a city</div>
+          </div>
+        </div>
+        <div>
+          <label for="name">Sede name</label>
+          <input type="text" formControlName="name" />
+          <div *ngIf="submitted && f.name.errors">
+            <div *ngIf="f.name.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div>
+          <button>Create</button>
+        </div>
+      </form>
+    </div>
+    <div class="column">
+      <h4>Sedes</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Sede name</th>
+            <th>City name</th>
+            <th>Registered users</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sede of sedes">
+            <td>{{ sede.name }}</td>
+            <td>{{ sede.city.name }}</td>
+            <td>{{ sede.userCounter }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

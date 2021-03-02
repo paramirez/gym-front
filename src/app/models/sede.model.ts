@@ -1,6 +1,11 @@
+import { City } from './city.model';
+
 export class Sede {
   private id: number;
-  private name: string;
+  name: string;
+  city?: number | City;
+  userCounter?: number;
+
   constructor(initial?: Partial<Sede>) {
     Object.assign(this, initial);
   }

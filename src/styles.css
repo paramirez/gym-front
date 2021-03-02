@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
@@ -9,9 +12,11 @@ body {
 
 .footer {
   height: 10px;
-  position: absolute;
   bottom: 0;
-  width: 100vw;
+  clear: both;
+  left: 0;
+  right: 0;
+  position: relative;
   background-color: #9b4dca;
 }
 
@@ -19,8 +24,11 @@ body {
   margin: 0 auto;
   /* max-width: 112.0rem; */
   padding: 0 2rem;
+  padding-top: 30px;
+  padding-bottom: 10px;
   position: relative;
   width: 100%;
+  min-height: calc(100vh - 60px);
 }
 
 a {
