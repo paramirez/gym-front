@@ -1,0 +1,10 @@
+.menu {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+.line {
+  color: lightgray;
+}

@@ -1,0 +1,24 @@
+<div class="menu" *ngIf="isLogged">
+  <div class="container">
+    <div class="row">
+      <div class="column">
+        Name: {{ name }} <span class="line">|</span>
+        <a
+          (click)="logout()"
+          class="px1"
+          style="cursor: pointer; text-decoration: underline"
+          >Logout</a
+        >
+      </div>
+      <div class="column" *ngIf="isAdmin">
+        <a routerLink="../" class="px1">Home</a>
+        <span class="line">|</span>
+        <a routerLink="../users" class="px1">Users</a>
+        <span class="line">|</span>
+        <a routerLink="../register" class="px1">Register</a>
+        <span class="line">|</span>
+        <a routerLink="../register" class="px1">Register</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,9 +13,32 @@ export class UserService {
       .post<User>(`${environment.apiUrl}/sedes/users/${sede}`, user)
       .pipe(
         map((r) => {
-          console.log(r);
           return true;
         })
       );
+  }
+
+  allUsers() {
+    return this.http.get<User[]>(`${environment.apiUrl}/users`).pipe();
+  }
+
+  byId(id: number) {
+    return this.http
+      .get<{ user: User }>(`${environment.apiUrl}/users/${id}`)
+      .pipe();
+  }
+
+  updateUser(id: number, data?: Partial<User>) {
+    return this.http
+      .put<number>(`${environment.apiUrl}/users/${id}`, { ...data })
+      .pipe();
+  }
+
+  allUsersByCityId(id: number) {
+    return this.http
+      .get<{ sede: number; users: User[] }[]>(
+        `${environment.apiUrl}/sedes/users/city/${id}`
+      )
+      .pipe();
   }
 }

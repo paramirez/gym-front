@@ -9,13 +9,12 @@ import { ErrorInterceptor, JwtInterceptor } from './interceptors';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AlertComponent } from './components';
-import { HomeComponent } from './home';
+import { AlertComponent, MenuComponent } from './components';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, AlertComponent, HomeComponent],
+  declarations: [AppComponent, AlertComponent, MenuComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

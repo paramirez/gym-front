@@ -1,4 +1,105 @@
-<div>
-  <a router-link="/account">Account</a>
-  {{ account.name }}
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <h4>My information</h4>
+      <table>
+        <tr>
+          <td><b>Name:</b></td>
+          <td>
+            <b *ngIf="!isFormName">
+              <a style="cursor: pointer" (click)="changeName()">{{
+                account.name || "Agregar nombre"
+              }}</a>
+            </b>
+            <form
+              [formGroup]="form"
+              (ngSubmit)="onSubmit('name')"
+              class="m0 p1 relative"
+              *ngIf="isFormName"
+            >
+              <div class="loading rounded" *ngIf="loading"></div>
+              <input type="text" formControlName="name" class="m0" />
+              <div *ngIf="submitted && f.name.errors">
+                <span *ngIf="submitted && f.name.errors.required"
+                  >Name is required</span
+                >
+                <span *ngIf="submitted && f.name.errors.minlength"
+                  >Name min length
+                  {{ f.name.errors.minlength.requiredLength }}</span
+                >
+              </div>
+              <div class="flex items-center" *ngIf="!loading">
+                <b><a (click)="onSubmit('name')" class="px2 py1">Save</a></b>
+                |
+                <b
+                  ><a (click)="cancel()" class="px2 py1" style="color: #95a5a6"
+                    >Cancel</a
+                  ></b
+                >
+              </div>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Email:</b></td>
+          <td>{{ account.email }}</td>
+        </tr>
+        <tr>
+          <td><b>Password:</b></td>
+          <td>
+            <b *ngIf="!isForm">
+              <a style="cursor: pointer" (click)="changePassword()"
+                >Change Password</a
+              >
+            </b>
+            <form
+              [formGroup]="form"
+              (ngSubmit)="onSubmit('password')"
+              class="m0 p1 relative"
+              *ngIf="isForm"
+            >
+              <div class="loading rounded" *ngIf="loading"></div>
+              <input type="password" formControlName="password" class="m0" />
+              <div *ngIf="submitted && f.password.errors">
+                <div *ngIf="submitted && f.password.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="submitted && f.password.errors.minlength">
+                  Password min length
+                  {{ f.password.errors.minlength.requiredLength }}
+                </div>
+                <div *ngIf="submitted && f.password.errors.withSpaces">
+                  Password cannot contain spaces
+                </div>
+              </div>
+              <div class="flex items-center" *ngIf="!loading">
+                <b
+                  ><a (click)="onSubmit('password')" class="px2 py1">Save</a></b
+                >
+                |
+                <b
+                  ><a (click)="cancel()" class="px2 py1" style="color: #95a5a6"
+                    >Cancel</a
+                  ></b
+                >
+              </div>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="column">
+      <h4 *ngIf="user.sedes && user.sedes.length">Sedes information</h4>
+      <table *ngFor="let sede of user.sedes">
+        <tr>
+          <td><b>Sede Name:</b></td>
+          <td>{{ sede.sede.name }}</td>
+        </tr>
+        <tr>
+          <td><b>City Name:</b></td>
+          <td>{{ sede.sede.city.name }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>

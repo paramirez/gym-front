@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <div class="row">
+        <div class="column">
+          <form
+            [formGroup]="form"
+            *ngIf="cities && cities.length"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="flex items-center">
+              <label class="px2" for="city">City</label>
+              <div class="px2" style="min-width: 300px">
+                <select formControlName="city" class="m0">
+                  <option [value]="city.id" *ngFor="let city of cities">
+                    {{ city.name }}
+                  </option>
+                </select>
+              </div>
+              <button class="m0 px2">Search</button>
+            </div>
+            <div *ngIf="submitted && f.city.errors">
+              <div *ngIf="submitted && f.city.errors.required">
+                City is required
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <table *ngIf="!citySearch">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Status</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let user of users">
+            <tr>
+              <td>{{ user.name || "Sin asignar" }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.roles.join(", ") }}</td>
+              <td>{{ user.status ? "Enabled" : "Disabled" }}</td>
+              <td>{{ getDate(user.createdAt) }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+      <div *ngIf="citySearch && search && search.length">
+        <div *ngFor="let sede of search">
+          <h4>
+            {{ sede.sede.name }}
+          </h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Status</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let user of sede.users">
+                <tr>
+                  <td>{{ user.name || "Sin asignar" }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.roles }}</td>
+                  <td>{{ user.status ? "Enabled" : "Disabled" }}</td>
+                  <td>{{ getDate(user.createdAt) }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

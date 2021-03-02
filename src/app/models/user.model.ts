@@ -2,9 +2,11 @@ export class User {
   id: number;
   name: string;
   email: string;
-  role: string[] = ['NORMAL'];
+  roles: string[] = ['NORMAL'];
   status: boolean;
   createdAt: string;
+  sedes?: {}[];
+  password?: string;
 
   constructor(initial?: Partial<User>) {
     Object.assign(this, initial);

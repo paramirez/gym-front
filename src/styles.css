@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-.app {
+body {
+  margin: 0;
+  padding: 0;
 }
 .center-form {
   min-height: 600px;
@@ -19,4 +21,21 @@
   padding: 0 2rem;
   position: relative;
   width: 100%;
+}
+
+a {
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes loading {
+  0% {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    background: rgba(0, 0, 0, 0.35);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0.4);
+  }
 }

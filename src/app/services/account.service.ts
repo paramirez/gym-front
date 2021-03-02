@@ -21,7 +21,7 @@ export class AccountService {
     const token = localStorage.getItem(localStorageUserKeys.account);
     const udecode = this.decodeToken(token);
     this.accountSubject = new BehaviorSubject<Account>(
-      new Account({ ...udecode, token })
+      new Account({ ...udecode, token: atob(token) })
     );
     this.account = this.accountSubject.asObservable();
   }

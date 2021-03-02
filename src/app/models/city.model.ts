@@ -1,5 +1,6 @@
 export class City {
-  private name: string;
+  name: string;
+  id: number;
   constructor(initial?: Partial<City>) {
     Object.assign(this, initial);
   }
